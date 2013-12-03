@@ -151,7 +151,6 @@ function doGet(e) {
     submitBtn.setStyleAttribute('width','120px');
     submitBtn.setStyleAttribute('background', '#4c8efb');
     submitBtn.setStyleAttribute('color', 'white');
-    //submitBtn.setStyleAttribute('fontWeight', 'bold');
     submitBtn.setId('submitBtn');
     
   var clearBtn = app.createButton('Clear form');
@@ -161,7 +160,6 @@ function doGet(e) {
     clearBtn.setStyleAttribute('marginLeft', '30px');
     clearBtn.setId('clearBtn');
     clearBtn.setStyleAttribute('color', 'white');
-    //clearBtn.setStyleAttribute('fontWeight', 'bold');
   
   btnPanel.add(submitBtn);
   btnPanel.add(clearBtn);
@@ -468,12 +466,7 @@ function submit(e){
   dataSheet.appendRow([classCode,titleText,setDate,dueDate,descText,form1,form2,form3,form4,form5,form6,user]);
   
   var callStop = new Date().getTime();
-  Logger.log("Elapsed time for write to sheet: " + (callStop - callStart));  
-  
-//create calendar event timings  
-  //var setDateText = setDate.toDateString();
-  //var setDateTextLong = setDateText + " " + startTime + " GMT+0800 (HKT)";
-  //var startTimeFull = new Date(setDateTextLong);
+  Logger.log("Elapsed time for write to sheet: " + (callStop - callStart));
   
   var startTime = getPeriod(period).start;
   var endTime = getPeriod(period).end;
