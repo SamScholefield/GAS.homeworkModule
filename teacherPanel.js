@@ -1,12 +1,15 @@
+/*create dataObjects from spreadsheet to identify user by logged in username
+**build personalised form if identified successfully*/
+
 function doGet(e) {
+
   var app = UiApp.createApplication();  
   var ss = SpreadsheetApp.openById("0AlOOZ32SnnaCdGhRakZCb3JpLWsxZU5QQkxuQ01HWHc");  
   var dataSheet = ss.getSheetByName("teacherDetails");  
   var loggedInUser = Session.getActiveUser().getEmail();  
   var classLookuprange = ss.getRangeByName("teacherLookup");
-  //var errorLabel1 = app.createLabel('oldtext').setStyleAttribute('color','#d64937').setStyleAttribute('fontSize','15px');
   var errorPanel = app.createVerticalPanel().setVisible(false).setId('errorPanel').setStyleAttribute('zIndex','10');
-   //errorPanel.add(errorLabel1,0,0);
+
   
 //create arrays from rows in range using standard getRowsData function
   var classObjects = getRowsData(dataSheet, classLookuprange);
@@ -25,11 +28,12 @@ function doGet(e) {
    var unknownUserWarning = app.createLabel('Your email address is not currently registered with the homework system.')
      .setStyleAttribute('fontSize', '15px').setStyleAttribute('fontWeight','bold').setStyleAttribute('color', 'red');
    var unknownUserLabel = app.createLabel('Please contact ict@nexus.edu.my')
-    //unknownUserLabel.setWidth('400px').setWordWrap(true);
-     .setStyleAttribute('fontSize', '15px');   
+     .setStyleAttribute('fontSize', '15px');
+     
     unknownUserPanel.add(unknownUserWarning, 0 , 0 );
     unknownUserPanel.add(unknownUserLabel, 0 , 30);
-    app.add(unknownUserPanel);    
+    app.add(unknownUserPanel);
+    
     return app;
   }  
   
@@ -108,6 +112,7 @@ function doGet(e) {
   
   flowPanel.add(dueDateLabel, 190, 70);
   flowPanel.add(dueDate, 190, 90);
+  
 //PERIOD/////////////
 
   var periodList = app.createListBox()
@@ -120,8 +125,7 @@ function doGet(e) {
     .addItem(6).addItem(7).addItem(8);
   
   flowPanel.add(periodListLabel, 360, 70); 
-  flowPanel.add(periodList, 360, 90);
-  
+  flowPanel.add(periodList, 360, 90);  
   
 //DESCRIPTION////////////////////////////////////////////////////////////////////////////// 
 
@@ -136,19 +140,6 @@ function doGet(e) {
   flowPanel.add(descLabel, 20, 120);
   flowPanel.add(descText, 20, 140);
   
-  
-//DOCUMENT LINK////////////////////////////////////////////////////////////////////////////
-
-  //var docLink = app.createTextBox().setWidth('420px').setHeight('20px');
-    //docLink.setName('docLink');
-    //docLink.setId('docLink');
-    
-  //var docLabel = app.createLabel('Document link');
-  
- // flowPanel.add(docLabel, 20, 250);
-  //flowPanel.add(docLink, 20, 270);
-  
-  
 //BUTTONS AND HANDLERS//////////////////////////////////////////////////////////////////
 
   var btnPanel = app.createHorizontalPanel();
@@ -160,7 +151,7 @@ function doGet(e) {
     submitBtn.setStyleAttribute('width','120px');
     submitBtn.setStyleAttribute('background', '#4c8efb');
     submitBtn.setStyleAttribute('color', 'white');
-    submitBtn.setStyleAttribute('fontWeight', 'bold');
+    //submitBtn.setStyleAttribute('fontWeight', 'bold');
     submitBtn.setId('submitBtn');
     
   var clearBtn = app.createButton('Clear form');
@@ -170,7 +161,7 @@ function doGet(e) {
     clearBtn.setStyleAttribute('marginLeft', '30px');
     clearBtn.setId('clearBtn');
     clearBtn.setStyleAttribute('color', 'white');
-    clearBtn.setStyleAttribute('fontWeight', 'bold');
+    //clearBtn.setStyleAttribute('fontWeight', 'bold');
   
   btnPanel.add(submitBtn);
   btnPanel.add(clearBtn);
@@ -215,7 +206,7 @@ var showWorking = app.createClientHandler().forTargets(workingPanel).setVisible(
   
 }
 
-// getRowsData iterates row by row in the input range and returns an array of objects.
+// STILLMAN > getRowsData iterates row by row in the input range and returns an array of objects.
 // Each object contains all the data for a given row, indexed by its normalized column name.
 // Arguments:
 //   - sheet: the sheet object that contains the data to be processed
@@ -232,7 +223,7 @@ function getRowsData(sheet, range, columnHeadersRowIndex) {
 }
 
 
-// getHeaderLabels returns an array of strings from with the first row.
+// STILLMAN > getHeaderLabels returns an array of strings from with the first row.
 //   - sheet: the sheet object that contains the data to be processed
 //   - range: the exact range of cells where the data is stored
 //   - columnHeadersRowIndex: specifies the row number where the column names are stored.
@@ -246,7 +237,7 @@ function getHeaderLabels(sheet, range, columnHeadersRowIndex) {
   return headers;
 }
 
-// getColumnsData iterates column by column in the input range and returns an array of objects.
+// STILLMAN > getColumnsData iterates column by column in the input range and returns an array of objects.
 // Each object contains all the data for a given column, indexed by its normalized row name.
 // Arguments:
 //   - sheet: the sheet object that contains the data to be processed
@@ -262,7 +253,7 @@ function getColumnsData(sheet, range, rowHeadersColumnIndex) {
 }
 
 
-// For every row of data in data, generates an object that contains the data. Names of
+// STILLMAN > For every row of data in data, generates an object that contains the data. Names of
 // object fields are defined in keys.
 // Arguments:
 //   - data: JavaScript 2d array
@@ -287,7 +278,7 @@ function getObjects(data, keys) {
   return objects;
 }
 
-// Returns an Array of normalized Strings.
+// STILLMAN > Returns an Array of normalized Strings.
 // Arguments:
 //   - headers: Array of Strings to normalize
 function normalizeHeaders(headers) {
@@ -301,7 +292,7 @@ function normalizeHeaders(headers) {
   return keys;
 }
 
-// Normalizes a string, by removing all alphanumeric characters and using mixed case
+// STILLMAN > Normalizes a string, by removing all alphanumeric characters and using mixed case
 // to separate words. The output will always start with a lower case letter.
 // This function is designed to produce JavaScript object property names.
 // Arguments:
@@ -335,26 +326,26 @@ function normalizeHeader(header) {
   return key;
 }
 
-// Returns true if the cell where cellData was read from is empty.
+// STILLMAN > Returns true if the cell where cellData was read from is empty.
 // Arguments:
 //   - cellData: string
 function isCellEmpty(cellData) {
   return typeof(cellData) == "string" && cellData == "";
 }
 
-// Returns true if the character char is alphabetical, false otherwise.
+// STILLMAN > Returns true if the character char is alphabetical, false otherwise.
 function isAlnum(char) {
   return char >= 'A' && char <= 'Z' ||
     char >= 'a' && char <= 'z' ||
     isDigit(char);
 }
 
-// Returns true if the character char is a digit, false otherwise.
+// STILLMAN >Returns true if the character char is a digit, false otherwise.
 function isDigit(char) {
   return char >= '0' && char <= '9';
 }
 
-// Given a JavaScript 2d Array, this function returns the transposed table.
+// STILLMAN > Given a JavaScript 2d Array, this function returns the transposed table.
 // Arguments:
 //   - data: JavaScript 2d Array
 // Returns a JavaScript 2d Array
@@ -378,7 +369,7 @@ function arrayTranspose(data) {
   return ret;
 }
 
-/*borrowed function to detect if value is a avlid date. 
+/*borrowed function to detect if value is a valid date. 
 original thread here: http://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript*/
 function isValidDate(d) {
   if ( Object.prototype.toString.call(d) !== "[object Date]" )
@@ -386,7 +377,7 @@ function isValidDate(d) {
   return !isNaN(d.getTime());
 }
 
-/*This is the main function that runs when user submits. It writes the values to 
+/*This is the main function that runs when user submits. It validates the input, then writes the values to 
 the spreadsheet and then creates a calendar event*/
 function submit(e){
   
@@ -399,9 +390,7 @@ function submit(e){
   var titleText = e.parameter.titleText;
   var setDate = e.parameter.setDate;
   var dueDate = e.parameter.dueDate;
-  var descText = e.parameter.descText;  
-  
-  
+  var descText = e.parameter.descText;   
   var period = e.parameter.periodSelect;
   
   Logger.log(period);
@@ -493,7 +482,7 @@ function submit(e){
   var startDateTextLong = dueDateText + " " + startTime + " GMT+0800 (HKT)";
   var dueDateTextLong = dueDateText + " " + endTime + " GMT+0800 (HKT)";
   var startTimeFull = new Date(startDateTextLong);
-  var endTimeFull = new Date(dueDateTextLong); 
+  var endTimeFull = new Date(dueDateTextLong);
   
 //return calendar by name
  var calStart = new Date().getTime();
@@ -530,14 +519,14 @@ function submit(e){
 //create proceed panel info text
  var proceedSuccess = app.createLabel('Homework set successfully');
     proceedSuccess.setStyleAttribute('color','#0ba55c');
-    proceedSuccess.setStyleAttribute('fontSize','30px');
+    proceedSuccess.setStyleAttribute('fontSize','15px');
     proceedSuccess.setStyleAttribute('fontWeight','Bold');
  var proceedTitle = app.createLabel('Title: ' + titleText);
     proceedTitle.setStyleAttribute('marginTop','15px');
-    proceedTitle.setStyleAttribute('fontSize','20px');
+    proceedTitle.setStyleAttribute('fontSize','15px');
  var proceedClass = app.createLabel('Class: ' + classCode);
     proceedClass.setStyleAttribute('marginTop','15px');
-    proceedClass.setStyleAttribute('fontSize','20px');
+    proceedClass.setStyleAttribute('fontSize','15px');
     
 //clear panel of 'working...' animation and load proceed info text and button
  workingPanel.clear();
@@ -547,16 +536,38 @@ function submit(e){
 
 }
 
-/*The clear function clears the form (excluding f*****g dateboxes)*/
+/*The clear function clears the form*/
 function clear(){
 
   var app = UiApp.getActiveApplication();
   
   var clearBtn = app.getElementById('clearBtn');
   var submitBtn = app.getElementById('submitBtn');
+  var errorPanel = app.getElementById('errorPanel');
+  var flowPanel = app.getElementById('flowPanel');
+  
+  errorPanel.clear();
   clearBtn.setEnabled(true);
   submitBtn.setEnabled(true);
   
+  var setDate = app.getElementById('setDate');
+  var dueDate = app.getElementById('dueDate');
+  
+  app.remove(setDate);
+  app.remove(dueDate);
+  
+  setDate = app.createDateBox().setWidth('150px').setHeight('20px');
+    setDate.setId('setDate');
+    setDate.setName('setDate');
+ 
+  
+  dueDate = app.createDateBox().setWidth('150px').setHeight('20px');
+    dueDate.setId('dueDate');
+    dueDate.setName('dueDate');  
+
+  flowPanel.add(setDate, 20, 90);
+  flowPanel.add(dueDate, 190, 90);
+    
   app.getElementById('classSelect').setItemSelected(0,true);
   app.getElementById('periodSelect').setItemSelected(0,true);
   app.getElementById('titleText').setValue('');
@@ -578,51 +589,12 @@ function proceed(){
   
   var submitBtn = app.getElementById('submitBtn');
   submitBtn.setEnabled(true);
-  //var errorPanel = app.getElementById('errorPanel');
-  //errorPanel.setVisible(false);
+  
   clear();
   
   return app;
   
 }
-
-/*this is the validation function that informs user of input issues
-and will stop submission if errors exist, should probably chain messages together into the panel
-if more than one error exists*/
-/*function errorInform(errors){
-
-  var app = UiApp.getActiveApplication();
-  var workingPanel = app.getElementById('workingPanel');
-    workingPanel.setVisible(false);
-  
-  var flowPanel = app.getElementById('flowPanel');  
-  
-  var errorLabel = app.getElementById('errorLabel');  
-    errorLabel.setVisible(true);
-  
-  if(error == 1){
-    errorLabel.setText('The due date you have chosen is in the past.');
-    }else if(error == 2){
-    errorLabel.setText('The due date you have chosen occurs before the set date.');
-    }else if(error == 3){
-    errorLabel.setText('The title field is blank.');
-    }else if(error == 4){
-    errorLabel.setText('The description field is blank.');
-    }else if(error == 6){
-    errorLabel.setText('The set date you provided is not a valid date.');
-    }else if(error == 7){
-    errorLabel.setText('The due date you provided is not a valid date.');
-    }else{
-    errorLabel.setText('You must select a class code.');
-    }
-    
-  var submitBtn = app.getElementById('submitBtn');
-  submitBtn.setEnabled(true);
-  
-  Logger.log('error code: ' + error);
-  return app;
-
-}/*
 
 /*this is a function to produce error labels and add them to errorPanel
 based on the values in the passed array*/
@@ -640,11 +612,11 @@ function buildErrorPanel(errorArray){
   var errors = [
     {
       label: 'Error 0',
-      description: 'You must select a class code.'
+      description: 'You have not selected a class code.'
     },
     {
       label: 'Error 1',
-      description: 'The title field is blank.'
+      description: 'The Homework title field is blank.'
     },
     {
       label: 'Error 2',
@@ -656,11 +628,11 @@ function buildErrorPanel(errorArray){
     },
     {
       label: 'Error 4',
-      description: 'The due date you have chosen occurs before the set date.'
+      description: 'The due date you provided occurs before the set date.'
     },
     {
       label: 'Error 5',
-      description: 'The due date you have chosen is in the past.'
+      description: 'The due date you provided is in the past.'
     },
     {
       label: 'Error 6',
@@ -674,16 +646,10 @@ function buildErrorPanel(errorArray){
 
   for(var i in errorArray){
     var errorId = errorArray[i];
-    Logger.log('errorId is: ' + errorId);
-    Logger.log('value at errorArray[i] is: ' + errorArray[i]);
-    Logger.log('error at position of errors is: ' + errors[errorId]);
-    Logger.log('description is:' + errors[errorId].description);
-      var errorLabel = app.createLabel(errors[errorId].description)
+    var errorLabel = app.createLabel(errors[errorId].description)
       .setStyleAttribute('color', 'red').setStyleAttribute('fontSize', '15px').setVisible(true);
     errorPanel.add(errorLabel);
     }
-  
-//insert errorlabel text array and creation loop here
   
   var submitBtn = app.getElementById('submitBtn');
   submitBtn.setEnabled(true);
