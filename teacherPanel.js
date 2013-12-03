@@ -9,7 +9,6 @@ function doGet(e) {
   var loggedInUser = Session.getActiveUser().getEmail();  
   var classLookuprange = ss.getRangeByName("teacherLookup");
   var errorPanel = app.createVerticalPanel().setVisible(false).setId('errorPanel').setStyleAttribute('zIndex','10');
-
   
 //create arrays from rows in range using standard getRowsData function
   var classObjects = getRowsData(dataSheet, classLookuprange);
@@ -25,13 +24,14 @@ function doGet(e) {
   
   if(known === false){
     var unknownUserPanel = app.createAbsolutePanel().setSize('600','800');
-   var unknownUserWarning = app.createLabel('Your email address is not currently registered with the homework system.')
-     .setStyleAttribute('fontSize', '15px').setStyleAttribute('fontWeight','bold').setStyleAttribute('color', 'red');
-   var unknownUserLabel = app.createLabel('Please contact ict@nexus.edu.my')
-     .setStyleAttribute('fontSize', '15px');
+    var unknownUserWarning = app.createLabel('Your email address is not currently registered with the homework system.')
+      .setStyleAttribute('fontSize', '15px').setStyleAttribute('fontWeight','bold').setStyleAttribute('color', 'red');
+    var unknownUserLabel = app.createLabel('Please contact ict@nexus.edu.my')
+      .setStyleAttribute('fontSize', '15px');
      
-    unknownUserPanel.add(unknownUserWarning, 0 , 0 );
-    unknownUserPanel.add(unknownUserLabel, 0 , 30);
+    unknownUserPanel.add(unknownUserWarning, 0 , 0 )
+      .add(unknownUserLabel, 0 , 30);
+      
     app.add(unknownUserPanel);
     
     return app;
@@ -59,16 +59,17 @@ function doGet(e) {
 // Get the size of an object
   var size = Object.size(classObjectsIndex[loggedInUser]);
   
-//CREATE MAIN PANEL/////////////////////////////////////////////////////////////////////
+// Create main container panel
   
   var flowPanel = app.createAbsolutePanel().setSize('600', '800').setId('flowPanel');
 
-//CLASS SELECT LISTBOX//////////////////////////////////////////////////////////////////
+// Create class select listbox personalised for user
   
-  var listBox = app.createListBox();
-    listBox.setWidth('150px').setHeight('20px');
-    listBox.setName('classSelect');
-    listBox.setId('classSelect');
+  var listBox = app.createListBox()
+    .setWidth('150px').setHeight('20px')
+    .setName('classSelect')
+    .setId('classSelect');
+    
   var classListLabel = app.createLabel('Select class');
   
   listBox.addItem('');
@@ -81,96 +82,81 @@ function doGet(e) {
     
   }  
   
-  flowPanel.add(classListLabel, 20, 20); 
-  flowPanel.add(listBox, 20, 40);
-  
-//TITLE///////////////////////////////////////////////////////////////////////////
+// Create Homework title text input box
 
-  var titleText = app.createTextBox().setWidth('320px').setHeight('20px');
-    titleText.setName('titleText');
-    titleText.setId('titleText');
+  var titleText = app.createTextBox().setWidth('320px').setHeight('20px')
+    .setName('titleText')
+    .setId('titleText');
     
   var titlelabel = app.createLabel('Homework title');
-  
-  flowPanel.add(titlelabel, 190, 20);
-  flowPanel.add(titleText, 190, 40);
 
-//DATE SECTION//////////////////////////////////////////////////////////////////////////
+// Create both date inputs
   
-  var setDate = app.createDateBox().setWidth('150px').setHeight('20px');
-    setDate.setId('setDate');
-    setDate.setName('setDate');
+  var setDate = app.createDateBox().setWidth('150px').setHeight('20px')
+    .setId('setDate')
+    .setName('setDate');
+    
   var setDateLabel = app.createLabel('Set active start date').setId('setDatelabel');
   
-  var dueDate = app.createDateBox().setWidth('150px').setHeight('20px');
-    dueDate.setId('dueDate');
-    dueDate.setName('dueDate');
+  var dueDate = app.createDateBox().setWidth('150px').setHeight('20px')
+    .setId('dueDate')
+    .setName('dueDate');
+    
   var dueDateLabel = app.createLabel('Set due date').setId('dueDateLabel');
   
-  flowPanel.add(setDateLabel, 20, 70);
-  flowPanel.add(setDate, 20, 90);
-  
-  flowPanel.add(dueDateLabel, 190, 70);
-  flowPanel.add(dueDate, 190, 90);
-  
-//PERIOD/////////////
+// Create period select listbox
 
   var periodList = app.createListBox()
     .setWidth('150px').setHeight('20px')
     .setName('periodSelect')
     .setId('periodSelect');
+    
   var periodListLabel = app.createLabel('Select due period');
   
   periodList.addItem('').addItem(1).addItem(2).addItem(3).addItem(4).addItem(5)
     .addItem(6).addItem(7).addItem(8);
   
-  flowPanel.add(periodListLabel, 360, 70); 
-  flowPanel.add(periodList, 360, 90);  
-  
-//DESCRIPTION////////////////////////////////////////////////////////////////////////////// 
+// Create description text input box
 
-  var descText = app.createTextArea().setSize('490px', '100px');
-    descText.setStyleAttribute('backgroundColor','white');
-    descText.setStyleAttribute('zIndex', '1')
-    descText.setName('descText');
-    descText.setId('descText');
+  var descText = app.createTextArea().setSize('490px', '100px')
+    .setStyleAttribute('backgroundColor','white')
+    .setStyleAttribute('zIndex', '1')
+    .setName('descText')
+    .setId('descText');
   
   var descLabel = app.createLabel('Enter homework details (inc. links)');
   
-  flowPanel.add(descLabel, 20, 120);
-  flowPanel.add(descText, 20, 140);
-  
-//BUTTONS AND HANDLERS//////////////////////////////////////////////////////////////////
+// Create buttons and handlers
 
-  var btnPanel = app.createHorizontalPanel();
-    btnPanel.setVisible(true);
-    btnPanel.setId('btnPanel');  
+  var btnPanel = app.createHorizontalPanel()
+    .setVisible(true)
+    .setId('btnPanel');  
   
-  var submitBtn = app.createButton('Set homework');
-    submitBtn.setStyleAttribute('height','40px');
-    submitBtn.setStyleAttribute('width','120px');
-    submitBtn.setStyleAttribute('background', '#4c8efb');
-    submitBtn.setStyleAttribute('color', 'white');
-    submitBtn.setId('submitBtn');
+  var submitBtn = app.createButton('Set homework')
+    .setStyleAttribute('height','40px')
+    .setStyleAttribute('width','120px')
+    .setStyleAttribute('background', '#4c8efb')
+    .setStyleAttribute('color', 'white')
+    .setId('submitBtn');
     
-  var clearBtn = app.createButton('Clear form');
-    clearBtn.setStyleAttribute('height','40px');
-    clearBtn.setStyleAttribute('width','120px');
-    clearBtn.setStyleAttribute('background', '#d64937');
-    clearBtn.setStyleAttribute('marginLeft', '30px');
-    clearBtn.setId('clearBtn');
-    clearBtn.setStyleAttribute('color', 'white');
+  var clearBtn = app.createButton('Clear form')
+    .setStyleAttribute('height','40px')
+    .setStyleAttribute('width','120px')
+    .setStyleAttribute('background', '#d64937')
+    .setStyleAttribute('marginLeft', '30px')
+    .setId('clearBtn')
+    .setStyleAttribute('color', 'white');
   
   btnPanel.add(submitBtn);
   btnPanel.add(clearBtn);
-  
-  flowPanel.add(btnPanel, 20, 250);
- 
-var workingPanel = app.createAbsolutePanel().setSize('600', '800');
-  workingPanel.setId('workingPanel');
-  workingPanel.setStyleAttribute('backgroundColor','white');
-  workingPanel.setStyleAttribute('zIndex', '10')
-  workingPanel.setVisible(false);
+
+// Create panel to hold 'working' animation
+
+var workingPanel = app.createAbsolutePanel().setSize('600', '800')
+  .setId('workingPanel')
+  .setStyleAttribute('backgroundColor','white')
+  .setStyleAttribute('zIndex', '10')
+  .setVisible(false);
   
 var workingLabel = app.createImage('https://go.nexus.edu.my/working.gif');
   workingPanel.add(workingLabel, 0, 0);
@@ -193,11 +179,18 @@ var showWorking = app.createClientHandler().forTargets(workingPanel).setVisible(
 
 //Add this handler to the clear button
   clearBtn.addClickHandler(clearHandler).addClickHandler(disableHandler);
-  
-//BUILD APP//////////////////////////////////////////////////////////////////////////////////// 
 
-  flowPanel.add(errorPanel, 20, 310);
-  flowPanel.add(workingPanel, 0 , 0);
+// Build app
+  flowPanel.add(classListLabel, 20, 20).add(listBox, 20, 40)
+    .add(titlelabel, 190, 20).add(titleText, 190, 40)
+    .add(setDateLabel, 20, 70).add(setDate, 20, 90)
+    .add(dueDateLabel, 190, 70).add(dueDate, 190, 90)
+    .add(periodListLabel, 360, 70).add(periodList, 360, 90)
+    .add(descLabel, 20, 120).add(descText, 20, 140)
+    .add(btnPanel, 20, 250)
+    .add(errorPanel, 20, 310)
+    .add(workingPanel, 0 , 0);
+  
   app.add(flowPanel);
   
   return app;
@@ -383,7 +376,8 @@ function submit(e){
   var timeCheck = new Date();
   var errorPanel = app.getElementById('errorPanel');
     errorPanel.clear();
-//get form values
+
+// Get form values
   var classCode = e.parameter.classSelect;
   var titleText = e.parameter.titleText;
   var setDate = e.parameter.setDate;
@@ -403,7 +397,7 @@ function submit(e){
   Logger.log(period);
   Logger.log(typeof period);
 
-//Validation section, server side ugh, this is ugly and should proabably be its own function
+//Validation section, server side ugh, this is ugly and should probably be its own function
   var errors = new Array();
   
   if(classCode == ''){
@@ -446,10 +440,9 @@ function submit(e){
   Logger.log('passed validation');
   var ss = SpreadsheetApp.openById("0AlOOZ32SnnaCdGhRakZCb3JpLWsxZU5QQkxuQ01HWHc");
   
-  var dataSheet = ss.getSheetByName("formData");
-  
-  var lastRow = dataSheet.getLastRow();
-  var ro = lastRow + 1;
+  var dataSheet = ss.getSheetByName("formData");    
+  var flowPanel = app.getElementById('flowPanel');
+  var workingPanel = app.getElementById('workingPanel');
   
   var callStart = new Date().getTime();
 
@@ -462,45 +455,60 @@ function submit(e){
   var form6 = '=VLOOKUP(RC[-10],classLookup,4,False)';
   var user = Session.getActiveUser().getEmail();
 
-//set values
+//get lock
+  var lockStart = new Date().getTime();
+  var lock = LockService.getPublicLock();
+  
+  try {
+   lock.waitLock(4000);
+ } catch (e) {
+   Logger.log('Could not obtain lock after 4 seconds.');
+   GmailApp.sendEmail('scholefield.s@nexus.edu.my', 'lock fail', 'lock acquisition fail (4 seconds)!');
+ }
+
+//write values to sheet
   dataSheet.appendRow([classCode,titleText,setDate,dueDate,descText,form1,form2,form3,form4,form5,form6,user]);
+  
+  var ro = dataSheet.getLastRow();
   
   var callStop = new Date().getTime();
   Logger.log("Elapsed time for write to sheet: " + (callStop - callStart));
   
+//get calendar name value form sheet lookup
+  var calStart = new Date().getTime();
+  var calName = dataSheet.getRange(ro, 11).getValue();
+    
+//release lock
+  lock.releaseLock();
+  var lockStop = new Date().getTime();
+  Logger.log("Elapsed time for lock: " + (lockStop - lockStart));
+
+//get Calendar by name
+  var cal = CalendarApp.getCalendarsByName(calName)[0];
+  var calStop = new Date().getTime();
+    Logger.log("Elapsed time for calName: " + (calStop - calStart));
+
+//create calendar event timings      
   var startTime = getPeriod(period).start;
-  var endTime = getPeriod(period).end;
-  
+  var endTime = getPeriod(period).end;  
   var dueDateText = dueDate.toDateString();
   var startDateTextLong = dueDateText + " " + startTime + " GMT+0800 (HKT)";
   var dueDateTextLong = dueDateText + " " + endTime + " GMT+0800 (HKT)";
   var startTimeFull = new Date(startDateTextLong);
   var endTimeFull = new Date(dueDateTextLong);
   
-//return calendar by name
- var calStart = new Date().getTime();
-  var calName = dataSheet.getRange(ro, 11).getValue();  
-  var cal = CalendarApp.getCalendarsByName(calName)[0];
-  Logger.log('calname returned');
-  var calStop = new Date().getTime();
-    Logger.log("Elapsed time for calName: " + (calStop - calStart));
-  
 //create event
-  Logger.log('event creation fired');
   var start = new Date().getTime();
   var event = cal.createEvent('Homework - ' + titleText, startTimeFull, endTimeFull, {description: descText, location: 'Nexus International School'});
   var stop = new Date().getTime();
   Logger.log("Elapsed time for createEvent: " + (stop - start));
-  
- var flowPanel = app.getElementById('flowPanel');
- var workingPanel = app.getElementById('workingPanel');
 
- var proceedBtn = app.createButton('OK').setSize('120px','40px')
-      .setStyleAttribute('background', '#4c8efb')
-      .setStyleAttribute('marginTop', '30px')
-      .setId('proceedBtn')
-      .setStyleAttribute('color', 'white')
-      .setStyleAttribute('fontWeight', 'bold');
+  var proceedBtn = app.createButton('OK').setSize('120px','40px')
+    .setStyleAttribute('background', '#4c8efb')
+    .setStyleAttribute('marginTop', '30px')
+    .setId('proceedBtn')
+    .setStyleAttribute('color', 'white')
+    .setStyleAttribute('fontWeight', 'bold');
     
 //Create handler which will execute 'proceed(e)' on clicking the button
  var proceedHandler = app.createServerClickHandler('proceed');
@@ -515,15 +523,13 @@ function submit(e){
     proceedSuccess.setStyleAttribute('fontSize','15px');
     proceedSuccess.setStyleAttribute('fontWeight','Bold');
  var proceedTitle = app.createLabel('Title: ' + titleText);
-    proceedTitle.setStyleAttribute('marginTop','15px');
     proceedTitle.setStyleAttribute('fontSize','15px');
  var proceedClass = app.createLabel('Class: ' + classCode);
-    proceedClass.setStyleAttribute('marginTop','15px');
     proceedClass.setStyleAttribute('fontSize','15px');
     
-//clear panel of 'working...' animation and load proceed info text and button
+//clear panel of 'working' animation and load confirmation text and proceed button
  workingPanel.clear();
- workingPanel.add(proceedSuccess).add(proceedClass).add(proceedTitle).add(proceedBtn);
+ workingPanel.add(proceedSuccess,0,0).add(proceedClass,0,30).add(proceedTitle,0,60).add(proceedBtn,0,70);
  
  return app;
 
@@ -551,8 +557,7 @@ function clear(){
   
   setDate = app.createDateBox().setWidth('150px').setHeight('20px');
     setDate.setId('setDate');
-    setDate.setName('setDate');
- 
+    setDate.setName('setDate'); 
   
   dueDate = app.createDateBox().setWidth('150px').setHeight('20px');
     dueDate.setId('dueDate');
@@ -578,10 +583,10 @@ function proceed(){
   var app = UiApp.getActiveApplication();
   
   var workingPanel = app.getElementById('workingPanel');
-  workingPanel.setVisible(false);
+    workingPanel.setVisible(false);
   
   var submitBtn = app.getElementById('submitBtn');
-  submitBtn.setEnabled(true);
+    submitBtn.setEnabled(true);
   
   clear();
   
@@ -645,8 +650,8 @@ function buildErrorPanel(errorArray){
     }
   
   var submitBtn = app.getElementById('submitBtn');
-  submitBtn.setEnabled(true);
- Logger.log('error routine completed: ' + errorArray);
+    submitBtn.setEnabled(true);
+    
   return app;
   
 }
