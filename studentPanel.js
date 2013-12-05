@@ -1,17 +1,13 @@
 function doGet(e) {
  
-  var app = UiApp.createApplication();
-  
-  var ss = SpreadsheetApp.openById("0AlOOZ32SnnaCdGhRakZCb3JpLWsxZU5QQkxuQ01HWHc");
-  
-  var dataSheet = ss.getSheetByName("studentDetails");
-  
-  var loggedInUser = Session.getActiveUser().getEmail();  
-  
+  var app                = UiApp.createApplication();  
+  var ss                 = SpreadsheetApp.openById("0AlOOZ32SnnaCdGhRakZCb3JpLWsxZU5QQkxuQ01HWHc");  
+  var dataSheet          = ss.getSheetByName("studentDetails");  
+  var loggedInUser       = Session.getActiveUser().getEmail();  
   var studentLookuprange = ss.getRangeByName("studentLookup");  
   
   //create arrays from rows in range using standard getRowsData function
-  var classObjects = getRowsData(dataSheet, studentLookuprange);
+  var classObjects       = getRowsData(dataSheet, studentLookuprange);
   
   //identify user as known or unknown, give error message if unknown, proceed if known
   var known = false;
@@ -27,7 +23,6 @@ function doGet(e) {
    var unknownUserWarning = app.createLabel('Your email address is not currently registered with the homework system.')
      .setStyleAttribute('fontSize', '15px').setStyleAttribute('fontWeight','bold').setStyleAttribute('color', 'red');
    var unknownUserLabel = app.createLabel('Please contact ict@nexus.edu.my')
-    //unknownUserLabel.setWidth('400px').setWordWrap(true);
      .setStyleAttribute('fontSize', '15px');   
     unknownUserPanel.add(unknownUserWarning, 0 , 0 );
     unknownUserPanel.add(unknownUserLabel, 0 , 30);
@@ -49,8 +44,7 @@ function doGet(e) {
     nameLabel.setStyleAttribute('fontSize','15px');
   app.add(nameLabel);
   
-  var dataSheet = ss.getSheetByName("classStatus");
-  
+  var dataSheet = ss.getSheetByName("classStatus");  
   var statusLookuprange = ss.getRangeByName("classLookup");
   
   //create arrays from rows in range using standard getRowsData function
@@ -76,59 +70,59 @@ function doGet(e) {
   };
 
   // Get the size of an object
-  var size = Object.size(classObjectsIndex[loggedInUser]);
+  var size = Object.size(classObjectsIndex[loggedInUser]);  
   
-  Logger.log(size);
-  
-  
+  //create flexTable
   var flexTable = app.createFlexTable();
     flexTable.setStyleAttribute('marginTop', '10px')
     flexTable.setCellPadding(5);
     flexTable.setCellSpacing(2);
-    
-  var tableArray = [];
-  var t0 = [];
-  var t1 = [];
-  var t2 = [];
-  var color = [];
-  var BGColor = [];
-  
-  
-  for(var i = 0;i<(size-1);i++){
-    
-    var class = "class" + (i+1);
+ 
+ //create empty table array to store rowObjects
+  var tableArray =[];
+
+//create rowObjects
+  for(var i = 0; i<(size-1); i++){
+    var rowObject = {};
+    var class = 'class' + (i+1);
     var classCode = classObjectsIndex[loggedInUser][class];
     
-    t0.push(statusObjectsIndex[classCode].classname);
-    t1.push(statusObjectsIndex[classCode].homeworkstatus);
-    t2.push(app.createAbsolutePanel().add(app.createAnchor('Calendar',statusObjectsIndex[classCode].classcalendarlink)));    
-  
-    if(statusObjectsIndex[classCode].homeworkstatus == "No homework set for this class"){
-      BGColor.push("#96bcfd");
-      color.push("#000000");
-    }else{
-      BGColor.push("#eca8a3");
-      color.push("#FFFFFF");    
-    }
+      rowObject.className      = statusObjectsIndex[classCode].classname;
+      rowObject.homeworkStatus = statusObjectsIndex[classCode].homeworkstatus;
+      rowObject.link           = app.createAbsolutePanel().add(app.createAnchor('Calendar',statusObjectsIndex[classCode].classcalendarlink));
+      
+      if(statusObjectsIndex[classCode].homeworkstatus == "No homework set for this class"){
+        rowObject.BGColor = "#96bcfd";
+        rowObject.color   = "#000000";
+      }else{
+        rowObject.BGColor = "#eca8a3";
+        rowObject.color   = "#FFFFFF";    
+      }
 
+      tableArray.push(rowObject);
   }
+ 
+//sort objects in array by homework status 
+  tableArray.sort(function (a, b) {
+    if (a.homeworkStatus > b.homeworkStatus)
+      return 1;
+    if (a.homeworkStatus < b.homeworkStatus)
+      return -1;
+    // a must be equal to b
+    return 0;
+  });  
 
-    tableArray.push(t0,t1,t2,color, BGColor);
-    
-    
-
-//INSERT SORT 
-    
-    for(var i = 0;i<(size-1);i++){
-
-      flexTable.setText(i,0, tableArray[0][i]);
-      flexTable.setText(i,1, tableArray[1][i]);
-      flexTable.setWidget(i,2, tableArray[2][i]);
-      flexTable.setRowStyleAttribute(i, 'color', tableArray[3][i]);
-      flexTable.setRowStyleAttribute(i, 'backgroundColor', tableArray[4][i]);
+//populate flextable
+  for(var i = 0;i<(size-1);i++){
+  
+      flexTable.setText(i,0, tableArray[i].className);
+      flexTable.setText(i,1, tableArray[i].homeworkStatus);
+      flexTable.setWidget(i,2, tableArray[i].link);
+      flexTable.setRowStyleAttribute(i, 'color', tableArray[i].color);
+      flexTable.setRowStyleAttribute(i, 'backgroundColor', tableArray[i].BGColor);
       
     };
-  
+
   app.add(flexTable);  
   
   return app;
