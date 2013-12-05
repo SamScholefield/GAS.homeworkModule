@@ -44,7 +44,7 @@ function doGet(e) {
     classObjectsIndex[classObjects[i].username] = classObjects[i];
     
   }
-
+  
   var nameLabel = app.createLabel('Displaying homework details for: ' + loggedInUser);
     nameLabel.setStyleAttribute('fontSize','15px');
   app.add(nameLabel);
@@ -78,44 +78,58 @@ function doGet(e) {
   // Get the size of an object
   var size = Object.size(classObjectsIndex[loggedInUser]);
   
+  Logger.log(size);
+  
   
   var flexTable = app.createFlexTable();
     flexTable.setStyleAttribute('marginTop', '10px')
     flexTable.setCellPadding(5);
     flexTable.setCellSpacing(2);
     
+  var tableArray = [];
+  var t0 = [];
+  var t1 = [];
+  var t2 = [];
+  var color = [];
+  var BGColor = [];
+  
+  
   for(var i = 0;i<(size-1);i++){
     
     var class = "class" + (i+1);
     var classCode = classObjectsIndex[loggedInUser][class];
     
-    var text10 = statusObjectsIndex[classCode].classname;
-    var text11 = statusObjectsIndex[classCode].homeworkstatus;
-    var text12 = statusObjectsIndex[classCode].classcalendarlink;
+    t0.push(statusObjectsIndex[classCode].classname);
+    t1.push(statusObjectsIndex[classCode].homeworkstatus);
+    t2.push(app.createAbsolutePanel().add(app.createAnchor('Calendar',statusObjectsIndex[classCode].classcalendarlink)));    
   
-    var anchor = app.createAnchor('Calendar', text12);
-      anchor.setTarget('_blank');
-    var calPanel = app.createAbsolutePanel();  
-      calPanel.add(anchor);
-  
-    flexTable.setText(i, 0, text10);
-    flexTable.setText(i, 1, text11);
-    flexTable.setWidget(i, 2, calPanel);
-    
-    //flexTable.setText(i, 0, classCode);
-    
-    if(text11 == "No homework set for this class"){
-      flexTable.setRowStyleAttribute(i, "backgroundColor", "#96bcfd")
-      flexTable.setRowStyleAttribute(i, "color", "#000000");
+    if(statusObjectsIndex[classCode].homeworkstatus == "No homework set for this class"){
+      BGColor.push("#96bcfd");
+      color.push("#000000");
     }else{
-      flexTable.setRowStyleAttribute(i, "backgroundColor", "#eca8a3");
-      flexTable.setRowStyleAttribute(i, "color", "#FFFFFF");      
-    };
-    
+      BGColor.push("#eca8a3");
+      color.push("#FFFFFF");    
+    }
+
   }
+
+    tableArray.push(t0,t1,t2,color, BGColor);
+    
+    
+
+//INSERT SORT 
+    
+    for(var i = 0;i<(size-1);i++){
+
+      flexTable.setText(i,0, tableArray[0][i]);
+      flexTable.setText(i,1, tableArray[1][i]);
+      flexTable.setWidget(i,2, tableArray[2][i]);
+      flexTable.setRowStyleAttribute(i, 'color', tableArray[3][i]);
+      flexTable.setRowStyleAttribute(i, 'backgroundColor', tableArray[4][i]);
+      
+    };
   
-  app.add(flexTable);
-  
+  app.add(flexTable);  
   
   return app;
 }
