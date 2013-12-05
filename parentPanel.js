@@ -1,7 +1,6 @@
 function doGet(e) {
   
-  var app = UiApp.createApplication();
-  
+  var app = UiApp.createApplication();  
   var mainPanel = app.createAbsolutePanel().setSize('600', '800').setId('mainPanel');
   
   var searchPanel = app.createHorizontalPanel();
@@ -22,24 +21,23 @@ function doGet(e) {
     searchBtn.setStyleAttribute('background', '#4c8efb');
     searchBtn.setStyleAttribute('color', 'white');
     searchBtn.setStyleAttribute('fontWeight', 'bold');
-    searchBtn.setId('searchBtn');
-  
+    searchBtn.setId('searchBtn');  
   
   var disableHandler = app.createClientHandler().forEventSource().setEnabled(false);
 
-var workingPanel = app.createAbsolutePanel().setSize('600', '800');
-  workingPanel.setId('workingPanel');
-  workingPanel.setStyleAttribute('zIndex', '10')
-  workingPanel.setVisible(false);
+  var workingPanel = app.createAbsolutePanel().setSize('600', '800');
+    workingPanel.setId('workingPanel');
+    workingPanel.setStyleAttribute('zIndex', '10')
+    workingPanel.setVisible(false);
   
-var workingLabel = app.createImage('https://go.nexus.edu.my/working.gif');
-  workingPanel.add(workingLabel);
+  var workingLabel = app.createImage('https://go.nexus.edu.my/working.gif');
+    workingPanel.add(workingLabel);
 
-var showWorking = app.createClientHandler().forTargets(workingPanel).setVisible(true);
+  var showWorking = app.createClientHandler().forTargets(workingPanel).setVisible(true);
 
 //Create handler which will execute 'search(e)' on clicking the button
   var searchHandler = app.createServerClickHandler('search');
-  searchHandler.addCallbackElement(mainPanel);
+    searchHandler.addCallbackElement(mainPanel);
 
 //Add handlers to the submit button
   searchBtn.addClickHandler(disableHandler).addClickHandler(searchHandler).addClickHandler(showWorking);
@@ -68,16 +66,11 @@ function search(e){
   mainPanel.clear();
   mainPanel.setVisible(false);
   
-  var searchTermRaw = e.parameter.searchBox;
-  
+  var searchTermRaw = e.parameter.searchBox;  
   var searchTerm = searchTermRaw.toString().toLowerCase();  
-  
-  var ss = SpreadsheetApp.openById("0AlOOZ32SnnaCdGhRakZCb3JpLWsxZU5QQkxuQ01HWHc");
-  
-  var dataSheet = ss.getSheetByName("studentDetails");
-  
+  var ss = SpreadsheetApp.openById("0AlOOZ32SnnaCdGhRakZCb3JpLWsxZU5QQkxuQ01HWHc");  
+  var dataSheet = ss.getSheetByName("studentDetails");  
   var loggedInUser = searchTerm;  
-  
   var studentLookuprange = ss.getRangeByName("studentLookup");  
   
   //create arrays from rows in range using standard getRowsData function
@@ -100,47 +93,48 @@ function search(e){
    var unknownUserLabel = app.createLabel('Please try again below or, alternatively, contact ict@nexus.edu.my') 
      .setStyleAttribute('fontSize', '15px');
     
-  var searchPanel = app.createHorizontalPanel();
-  var searchBtnPanel = app.createHorizontalPanel();  
+   var searchPanel = app.createHorizontalPanel();
+   var searchBtnPanel = app.createHorizontalPanel();  
   
-  var searchBox = app.createTextBox().setId("searchBox").setName("searchBox")
-    searchBox.setStyleAttribute("color","gray").setValue("Input learner email here");
-    searchBox.setStyleAttribute('height','40px');
-    searchBox.setStyleAttribute('width','400px');
-    searchBox.setStyleAttribute('fontSize', '20px')
-  var focusHandler = app.createClientHandler().forEventSource().setText("")
-    .setStyleAttribute("color","black");
-  searchBox.addFocusHandler(focusHandler);
+   var searchBox = app.createTextBox().setId("searchBox").setName("searchBox")
+     searchBox.setStyleAttribute("color","gray").setValue("Input learner email here");
+     searchBox.setStyleAttribute('height','40px');
+     searchBox.setStyleAttribute('width','400px');
+     searchBox.setStyleAttribute('fontSize', '20px')
+   var focusHandler = app.createClientHandler().forEventSource().setText("")
+     .setStyleAttribute("color","black");
+   
+   searchBox.addFocusHandler(focusHandler);
   
-  var searchBtn = app.createButton('Search');
-    searchBtn.setStyleAttribute('height','40px');
-    searchBtn.setStyleAttribute('width','120px');
-    searchBtn.setStyleAttribute('background', '#4c8efb');
-    searchBtn.setStyleAttribute('color', 'white');
-    searchBtn.setStyleAttribute('fontWeight', 'bold');
-    searchBtn.setId('searchBtn');
+   var searchBtn = app.createButton('Search');
+     searchBtn.setStyleAttribute('height','40px');
+     searchBtn.setStyleAttribute('width','120px');
+     searchBtn.setStyleAttribute('background', '#4c8efb');
+     searchBtn.setStyleAttribute('color', 'white');
+     searchBtn.setStyleAttribute('fontWeight', 'bold');
+     searchBtn.setId('searchBtn');
   
 //Create handler which will execute 'search(e)' on clicking the button
-  var searchHandler = app.createServerClickHandler('search');
-  searchHandler.addCallbackElement(mainPanel);
+   var searchHandler = app.createServerClickHandler('search');
+     searchHandler.addCallbackElement(mainPanel);
 
 //Add this handler to the submit button
-  searchBtn.addClickHandler(searchHandler);
+   searchBtn.addClickHandler(searchHandler);
   
 //build mainPanel
-  searchPanel.add(searchBox);
-  searchBtnPanel.add(searchBtn);
-  mainPanel.add(unknownUserWarning, 0 , 0);
-  mainPanel.add(unknownUserLabel, 0, 30)
-  mainPanel.add(searchPanel, 5, 70);
-  mainPanel.add(searchBtnPanel, 1, 115);
+   searchPanel.add(searchBox);
+   searchBtnPanel.add(searchBtn);
+   mainPanel.add(unknownUserWarning, 0 , 0);
+   mainPanel.add(unknownUserLabel, 0, 30)
+   mainPanel.add(searchPanel, 5, 70);
+   mainPanel.add(searchBtnPanel, 1, 115);
   
-  workingPanel.setVisible(false);
-  app.add(mainPanel);
+   workingPanel.setVisible(false);
+   app.add(mainPanel);
  
-  mainPanel.setVisible(true);    
+   mainPanel.setVisible(true);    
   
-  return app;
+   return app;
   }
   
   
@@ -160,8 +154,7 @@ function search(e){
   
   app.add(nameLabel);
   
-  var dataSheet = ss.getSheetByName("classStatus");
-  
+  var dataSheet = ss.getSheetByName("classStatus");  
   var statusLookuprange = ss.getRangeByName("classLookup");
   
   //create arrays from rows in range using standard getRowsData function
@@ -194,37 +187,54 @@ function search(e){
     flexTable.setStyleAttribute('marginTop', '10px')
     flexTable.setCellPadding(5);
     flexTable.setCellSpacing(2);
-    
-  for(var i = 0;i<(size-1);i++){
-    
-    var class = "class" + (i+1);
+  
+//create empty table array to store rowObjects
+  var tableArray =[];
+
+//create rowObjects
+  for(var i = 0; i<(size-1); i++){
+    var rowObject = {};
+    var class = 'class' + (i+1);
     var classCode = classObjectsIndex[loggedInUser][class];
     
-    var text10 = statusObjectsIndex[classCode].classname;
-    var text11 = statusObjectsIndex[classCode].homeworkstatus;
-    var text12 = statusObjectsIndex[classCode].classcalendarlink;
-  
-    var anchor = app.createAnchor('Calendar', text12)
-    var calPanel = app.createAbsolutePanel();  
-      calPanel.add(anchor);
-  
-    flexTable.setText(i, 0, text10);
-    flexTable.setText(i, 1, text11);
-    flexTable.setWidget(i, 2, calPanel);
-    
-    //flexTable.setText(i, 0, classCode);
-    
-    if(text11 == "No homework set for this class"){
-      flexTable.setRowStyleAttribute(i, "backgroundColor", "#96bcfd")
-      flexTable.setRowStyleAttribute(i, "color", "#000000");
-    }else{
-      flexTable.setRowStyleAttribute(i, "backgroundColor", "#eca8a3");
-      flexTable.setRowStyleAttribute(i, "color", "#FFFFFF");      
-    };   
-    
+      rowObject.className      = statusObjectsIndex[classCode].classname;
+      rowObject.homeworkStatus = statusObjectsIndex[classCode].homeworkstatus;
+      rowObject.link           = app.createAbsolutePanel().add(app.createAnchor('Calendar',statusObjectsIndex[classCode].classcalendarlink));
+      
+      if(statusObjectsIndex[classCode].homeworkstatus == "No homework set for this class"){
+        rowObject.BGColor = "#96bcfd";
+        rowObject.color   = "#000000";
+      }else{
+        rowObject.BGColor = "#eca8a3";
+        rowObject.color   = "#FFFFFF";    
+      }
+
+      tableArray.push(rowObject);
   }
+ 
+//sort objects in array by homework status 
+  tableArray.sort(function (a, b) {
+    if (a.homeworkStatus > b.homeworkStatus)
+      return 1;
+    if (a.homeworkStatus < b.homeworkStatus)
+      return -1;
+    // a must be equal to b
+    return 0;
+  });  
+
+//populate flextable
+  for(var i = 0;i<(size-1);i++){
   
-  flexTable.setColumnStyleAttribute(3, "background", "#dddddd");
+      flexTable.setText(i,0, tableArray[i].className);
+      flexTable.setText(i,1, tableArray[i].homeworkStatus);
+      flexTable.setWidget(i,2, tableArray[i].link);
+      flexTable.setRowStyleAttribute(i, 'color', tableArray[i].color);
+      flexTable.setRowStyleAttribute(i, 'backgroundColor', tableArray[i].BGColor);
+      
+    };
+
+  
+  //flexTable.setColumnStyleAttribute(3, "background", "#dddddd");
   workingPanel.setVisible(false);
   app.add(flexTable);
   
