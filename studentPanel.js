@@ -10,7 +10,7 @@ function doGet(e) {
   var classObjects       = getRowsData(dataSheet, studentLookuprange);
   
   //identify user as known or unknown, give error message if unknown, proceed if known
-  var known = false;
+  var known              = false;
   
   for (var i=0;i<classObjects.length;i++){  
     if(classObjects[i].username === loggedInUser){
@@ -84,8 +84,8 @@ function doGet(e) {
 //create rowObjects
   for(var i = 0; i<(size-1); i++){
     var rowObject = {};
-    var class = 'class' + (i+1);
-    var classCode = classObjectsIndex[loggedInUser][class];
+    var classHeader = 'class' + (i+1);
+    var classCode = classObjectsIndex[loggedInUser][classHeader];
     
       rowObject.className      = statusObjectsIndex[classCode].classname;
       rowObject.homeworkStatus = statusObjectsIndex[classCode].homeworkstatus;
@@ -110,16 +110,16 @@ function doGet(e) {
       return -1;
     // a must be equal to b
     return 0;
-  });  
+  });
 
 //populate flextable
   for(var i = 0;i<(size-1);i++){
   
-      flexTable.setText(i,0, tableArray[i].className);
-      flexTable.setText(i,1, tableArray[i].homeworkStatus);
-      flexTable.setWidget(i,2, tableArray[i].link);
-      flexTable.setRowStyleAttribute(i, 'color', tableArray[i].color);
-      flexTable.setRowStyleAttribute(i, 'backgroundColor', tableArray[i].BGColor);
+      flexTable.setText(i,0, tableArray[i].className)
+        .setText(i,1, tableArray[i].homeworkStatus)
+        .setWidget(i,2, tableArray[i].link)
+        .setRowStyleAttribute(i, 'color', tableArray[i].color)
+        .setRowStyleAttribute(i, 'backgroundColor', tableArray[i].BGColor);
       
     };
 

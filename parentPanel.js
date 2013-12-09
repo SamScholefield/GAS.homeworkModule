@@ -194,8 +194,8 @@ function search(e){
 //create rowObjects
   for(var i = 0; i<(size-1); i++){
     var rowObject = {};
-    var class = 'class' + (i+1);
-    var classCode = classObjectsIndex[loggedInUser][class];
+    var classHeader = 'class' + (i+1);
+    var classCode = classObjectsIndex[loggedInUser][classHeader];
     
       rowObject.className      = statusObjectsIndex[classCode].classname;
       rowObject.homeworkStatus = statusObjectsIndex[classCode].homeworkstatus;
