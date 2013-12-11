@@ -195,18 +195,17 @@ function search(e){
   for(var i = 0; i<(size-1); i++){
     var rowObject = {};
     var classHeader = 'class' + (i+1);
-    var classCode = classObjectsIndex[loggedInUser][classHeader];
     
-      rowObject.className      = statusObjectsIndex[classCode].classname;
-      rowObject.homeworkStatus = statusObjectsIndex[classCode].homeworkstatus;
-      rowObject.link           = app.createAbsolutePanel().add(app.createAnchor('Calendar',statusObjectsIndex[classCode].classcalendarlink));
+      rowObject.claName = statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].classname;
+      rowObject.homeworkStatus = statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].homeworkstatus;
+      rowObject.calLink = app.createAbsolutePanel().add(app.createAnchor('Calendar',statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].classcalendarlink));
       
-      if(statusObjectsIndex[classCode].homeworkstatus == "No homework set for this class"){
-        rowObject.BGColor = "#96bcfd";
-        rowObject.color   = "#000000";
-      }else{
+      if(statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].homeworkstatus == "Homework set for this class"){
         rowObject.BGColor = "#eca8a3";
-        rowObject.color   = "#FFFFFF";    
+        rowObject.cellColor   = "#FFFFFF";        
+      }else{
+        rowObject.BGColor = "#96bcfd";
+        rowObject.cellColor   = "#000000";  
       }
 
       tableArray.push(rowObject);
@@ -220,20 +219,19 @@ function search(e){
       return -1;
     // a must be equal to b
     return 0;
-  });  
+  });
 
 //populate flextable
   for(var i = 0;i<(size-1);i++){
   
-      flexTable.setText(i,0, tableArray[i].className);
-      flexTable.setText(i,1, tableArray[i].homeworkStatus);
-      flexTable.setWidget(i,2, tableArray[i].link);
-      flexTable.setRowStyleAttribute(i, 'color', tableArray[i].color);
-      flexTable.setRowStyleAttribute(i, 'backgroundColor', tableArray[i].BGColor);
+      flexTable.setText(i,0, tableArray[i].claName)
+        .setText(i,1, tableArray[i].homeworkStatus)
+        .setWidget(i,2, tableArray[i].calLink)
+        .setRowStyleAttribute(i, 'color', tableArray[i].cellColor)
+        .setRowStyleAttribute(i, 'backgroundColor', tableArray[i].BGColor);
       
     };
 
-  
   //flexTable.setColumnStyleAttribute(3, "background", "#dddddd");
   workingPanel.setVisible(false);
   app.add(flexTable);
