@@ -198,7 +198,12 @@ function search(e){
     
       rowObject.claName = statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].classname;
       rowObject.homeworkStatus = statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].homeworkstatus;
-      rowObject.calLink = app.createAbsolutePanel().add(app.createAnchor('Calendar',statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].classcalendarlink));
+      
+      if(statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].homeworkstatus === "Study group - No homework"){
+        rowObject.calLink = app.createLabel('No calendar');
+      }else{
+        rowObject.calLink = app.createAbsolutePanel().add(app.createAnchor('Open calendar',statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].classcalendarlink));
+      }    
       
       if(statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].homeworkstatus == "Homework set for this class"){
         rowObject.BGColor = "#f3f3f3";
