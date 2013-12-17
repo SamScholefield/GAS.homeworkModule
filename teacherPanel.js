@@ -142,10 +142,10 @@ function doGet(e) {
   var clearBtn = app.createButton('Clear form')
     .setStyleAttribute('height','40px')
     .setStyleAttribute('width','120px')
-    .setStyleAttribute('background', '#d64937')
+    .setStyleAttribute('background', '#f3f3f3')
     .setStyleAttribute('marginLeft', '30px')
     .setId('clearBtn')
-    .setStyleAttribute('color', 'white');
+    .setStyleAttribute('color', '#707070');
   
   btnPanel.add(submitBtn);
   btnPanel.add(clearBtn);

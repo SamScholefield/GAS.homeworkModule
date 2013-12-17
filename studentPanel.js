@@ -88,14 +88,14 @@ function doGet(e) {
     
       rowObject.claName = statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].classname;
       rowObject.homeworkStatus = statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].homeworkstatus;
-      rowObject.calLink = app.createAbsolutePanel().add(app.createAnchor('Calendar',statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].classcalendarlink));
+      rowObject.calLink = app.createAbsolutePanel().add(app.createAnchor('Open calendar',statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].classcalendarlink));
       
       if(statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].homeworkstatus == "Homework set for this class"){
-        rowObject.BGColor = "#eca8a3";
-        rowObject.cellColor   = "#FFFFFF";        
+        rowObject.BGColor = "#f3f3f3";
+        rowObject.cellColor   = "#0ba55c";        
       }else{
-        rowObject.BGColor = "#96bcfd";
-        rowObject.cellColor   = "#000000"; 
+        rowObject.BGColor = "#f3f3f3";
+        rowObject.cellColor   = "#707070"; 
       }
 
       tableArray.push(rowObject);
