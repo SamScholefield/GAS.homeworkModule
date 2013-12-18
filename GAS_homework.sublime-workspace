@@ -1,0 +1,349 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"back",
+				"background-repeat"
+			],
+			[
+				"ta",
+				"table-cell"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"padd",
+				"padding-left"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"li",
+				"list-style-type"
+			],
+			[
+				"backg",
+				"background-image"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "studentPanel.js",
+			"settings":
+			{
+				"buffer_size": 10756,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "parentPanel.js",
+			"settings":
+			{
+				"buffer_size": 14602,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "teacherPanel.js",
+			"settings":
+			{
+				"buffer_size": 22361,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Volumes/Macintosh HD/Users/scholefield.s/blabber/package.json",
+			"settings":
+			{
+				"buffer_size": 256,
+				"line_ending": "Unix",
+				"name": "{"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"",
+				"Preferences: Browse Packages"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Volumes/Macintosh HD/Users/scholefield.s/GAS.homeworkModule/archiveUtility.js",
+		"/Volumes/Macintosh HD/Users/scholefield.s/GAS.homeworkModule/teacherPanel.js",
+		"/Volumes/Macintosh HD/Users/scholefield.s/GAS.homeworkModule/parentPanel.js",
+		"/Volumes/Macintosh HD/Users/scholefield.s/GAS.homeworkModule/studentPanel.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/FIGHT/index.html",
+		"/Volumes/Macintosh HD/Users/scholefield.s/Library/Application Support/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/Applications/XAMPP/xamppfiles/htdocs/FIGHT/js/fight_game.js",
+		"/Volumes/Macintosh HD/Users/scholefield.s/Documents/snippet.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/FIGHT/js/fight.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/FIGHT/css/bootstrap.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/FIGHT/css/fight.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/GAME/js/inventory.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/GAME/fight.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/GAME/css/game.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/SITE/index.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/SITE/css/site.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/Bootstrap/carousel.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/Bootstrap/display.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/Bootstrap/js/ticktock.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/Bootstrap/css/control.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/Bootstrap/css/display.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/Bootstrap/control.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/Bootstrap/bootstrapBASIC.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/Project/control.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/Project/css/control.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/Project/js/scoreboard.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/Bootstrap/css/bootstrap.min.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/Bootstrap_project_01/js/controls.js"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"firstTitle",
+			"bar",
+			";\n",
+			"topbar",
+			".topbar",
+			"h2",
+			"h1",
+			"danger"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "studentPanel.js",
+					"settings":
+					{
+						"buffer_size": 10756,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10756,
+								10756
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3789.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "parentPanel.js",
+					"settings":
+					{
+						"buffer_size": 14602,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14602,
+								14602
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5484.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "teacherPanel.js",
+					"settings":
+					{
+						"buffer_size": 22361,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								22361,
+								22361
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 9969.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Volumes/Macintosh HD/Users/scholefield.s/blabber/package.json",
+					"settings":
+					{
+						"buffer_size": 256,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								256,
+								256
+							]
+						],
+						"settings":
+						{
+							"auto_name": "{",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}
