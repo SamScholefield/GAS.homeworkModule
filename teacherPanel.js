@@ -450,17 +450,17 @@ function submit(e){
   var form1 = '=IF(NOW()>RC[-3], \"1\", \"0\")';
   var form2 = '=IF(NOW()<RC[-3], \"1\", \"0\")';
   var form3 = '=IF(SUM(RC[-2]:RC[-1])=2, \"1\",\"0\")';
-  var form4 = '=RC[-6]& \" 00:00:01\"';
-  var form5 = '=RC[-6]& \" 23:59:59\"';
-  var form6 = '=VLOOKUP(RC[-10],classLookup,4,False)';
+  //var form4 = '=RC[-6]& \" 00:00:01\"';
+  //var form5 = '=RC[-6]& \" 23:59:59\"';
+  var form6 = '=VLOOKUP(RC[-9],classLookup,4,False)';
   var user = Session.getActiveUser().getEmail();
   var UID = new Date().getTime();
 
 //write values to sheet
-  dataSheet.appendRow([classCode,titleText,setDate,dueDate,descText,form1,form2,form3,form4,form5,form6,user, '', UID]);
+  dataSheet.appendRow([classCode,titleText,setDate,dueDate,descText,form1,form2,form3,period,form6,user, '', UID]);
   
   var lastRow = dataSheet.getLastRow();
-  var UIDArray = dataSheet.getRange("N1:N" + lastRow).getValues();
+  var UIDArray = dataSheet.getRange("M1:M" + lastRow).getValues();
   var ro = '';
   var i = 0;
  
@@ -478,7 +478,7 @@ function submit(e){
   
 //get calendar name value form sheet lookup
   var calStart = new Date().getTime();
-  var calName = dataSheet.getRange(ro, 11).getValue();
+  var calName = dataSheet.getRange(ro, 10).getValue();
 
 //get Calendar by name
   var cal = CalendarApp.getCalendarsByName(calName)[0];
@@ -499,7 +499,7 @@ function submit(e){
   var event = cal.createEvent('Homework - ' + titleText, startTimeFull, endTimeFull, {description: descText, location: 'Nexus International School'});
   var eveId = event.getId();
   
-  dataSheet.getRange(ro,13).setValue(eveId);
+  dataSheet.getRange(ro,12).setValue(eveId);
   var stop = new Date().getTime();
   Logger.log("Elapsed time for createEvent: " + (stop - start));
   
