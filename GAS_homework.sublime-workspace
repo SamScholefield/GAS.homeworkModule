@@ -59,17 +59,8 @@
 			"file": "teacherPanel.js",
 			"settings":
 			{
-				"buffer_size": 22361,
+				"buffer_size": 22359,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Volumes/Macintosh HD/Users/scholefield.s/blabber/package.json",
-			"settings":
-			{
-				"buffer_size": 256,
-				"line_ending": "Unix",
-				"name": "{"
 			}
 		}
 	],
@@ -101,6 +92,7 @@
 	},
 	"file_history":
 	[
+		"/Volumes/Macintosh HD/Users/scholefield.s/blabber/package.json",
 		"/Volumes/Macintosh HD/Users/scholefield.s/GAS.homeworkModule/archiveUtility.js",
 		"/Volumes/Macintosh HD/Users/scholefield.s/GAS.homeworkModule/teacherPanel.js",
 		"/Volumes/Macintosh HD/Users/scholefield.s/GAS.homeworkModule/parentPanel.js",
@@ -171,7 +163,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -235,15 +227,15 @@
 					"file": "teacherPanel.js",
 					"settings":
 					{
-						"buffer_size": 22361,
+						"buffer_size": 22359,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22361,
-								22361
+								22359,
+								22359
 							]
 						],
 						"settings":
@@ -254,33 +246,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 9969.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/Volumes/Macintosh HD/Users/scholefield.s/blabber/package.json",
-					"settings":
-					{
-						"buffer_size": 256,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								256,
-								256
-							]
-						],
-						"settings":
-						{
-							"auto_name": "{",
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
