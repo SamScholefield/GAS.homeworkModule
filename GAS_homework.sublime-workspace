@@ -62,6 +62,14 @@
 				"buffer_size": 22359,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "archiveUtility.js",
+			"settings":
+			{
+				"buffer_size": 2486,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -163,7 +171,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -246,6 +254,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 9969.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "archiveUtility.js",
+					"settings":
+					{
+						"buffer_size": 2486,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2486,
+								2486
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 729.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
