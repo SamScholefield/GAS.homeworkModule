@@ -11,13 +11,13 @@ function onOpen() {
 //sort existing rows newest to oldest
 //run gerArrayIndex() returns row index for first row where date < today
 //if expired rows found run archiveExpired(), else exit
-function sortByDueDate() {
+function sortByDueDate(){
 
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var mainSheet = ss.getActiveSheet();
+  var mainSheet = ss.getSheetByName('formData');
   
   var lastRow = mainSheet.getLastRow();
-  var dataRange = mainSheet.getRange("A2:N" + lastRow);
+  var dataRange = mainSheet.getRange("A2:M" + lastRow);
   var rowIndex = 0;
   dataRange.sort({column: 4, ascending: false});
   var dateArray = mainSheet.getRange("D1:D" + lastRow).getValues(); 
@@ -55,10 +55,12 @@ function archiveExpired(rowIndex, height, lastRow, ss, mainSheet){
   var archiveLastRow = archiveSheet.getLastRow();
   var pasteStart = archiveLastRow + 1;
   var pasteEnd = archiveLastRow + height;
+  var timeStamp = new Date();
   
-  var copyValues = mainSheet.getRange("A" + rowIndex + ":N" + lastRow).getValues();
-  archiveSheet.getRange("A" + pasteStart + ":N" + pasteEnd).setValues(copyValues);
-
+  var copyValues = mainSheet.getRange("A" + rowIndex + ":M" + lastRow).getValues();
+  archiveSheet.getRange("A" + pasteStart + ":M" + pasteEnd).setValues(copyValues);
+  archiveSheet.getRange("N" + pasteStart + ":N" + pasteEnd).setValue(timeStamp);
+  
   deleteExpired(rowIndex, lastRow, ss, mainSheet);
   
   return;
@@ -68,7 +70,7 @@ function archiveExpired(rowIndex, height, lastRow, ss, mainSheet){
 //deletes expired rows from main workbook
 function deleteExpired(rowIndex, lastRow, ss, mainSheet){
 
-  mainSheet.getRange("A" + rowIndex + ":N" + lastRow).clear();
+  mainSheet.getRange("A" + rowIndex + ":M" + lastRow).clear();
 
 }
 
@@ -89,4 +91,5 @@ function getArrayIndex(dateArray, ss, mainSheet){
       }
    }
 }
+
   
