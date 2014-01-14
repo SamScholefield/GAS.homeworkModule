@@ -45,17 +45,58 @@ function doGet(e) {
   var eventObjects = getRowsData(formSheet, eventLookuprange, 2);
   
   //create empty object to index eventObjects by username
-  var eventObjectsIndex = {};
+  //var eventObjectsIndex = {};
   
   //iterate through all eventobjects and index each array by username
-  for (var i=0;i<eventObjects.length;i++){
+  //for (var i=0;i<eventObjects.length;i++){
   
-    eventObjectsIndex[eventObjects[i].username] = eventObjects[i];
+    //eventObjectsIndex[eventObjects[i].username] = eventObjects[i];
     
+  //}
+  
+  Logger.log(eventObjects[0].setdate);
+  Logger.log(eventObjects[0].username);
+  
+  
+  //create flexTable
+  var flexTable = app.createFlexTable();
+    flexTable.setStyleAttribute('marginTop', '10px')
+    flexTable.setCellPadding(5);
+    flexTable.setCellSpacing(2);
+    flexTable.setText(1,0, 'Class code');
+    flexTable.setText(1,1, 'Title');
+    flexTable.setText(1,2, 'Set date');
+    flexTable.setText(1,3, 'Due date');
+    flexTable.setText(1,4, 'Period');
+    flexTable.setRowStyleAttribute(1, 'fontWeight', 'bold');
+    
+  var k = 2;
+ 
+  for(var i = 0; i < eventObjects.length; i++){
+
+    if(eventObjects[i].username == loggedInUser){
+      flexTable.setText(k, 0, eventObjects[i].classcode);
+      flexTable.setText(k, 1, eventObjects[i].titletext);
+      flexTable.setText(k, 2, new Date(eventObjects[i].setdate));
+      flexTable.setText(k, 3, new Date(eventObjects[i].duedate));
+      flexTable.setText(k, 4, eventObjects[i].period);
+      flexTable.setRowStyleAttribute(k, 'background', 'f3f3f3')
+      k++
+    }
+
   }
   
-  var emailUser = "wilson.j@nexus.edu.my";
-  Logger.log(eventObjectsIndex[emailUser].setdate);
+  app.add(flexTable);
+  return app;
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 }
 
