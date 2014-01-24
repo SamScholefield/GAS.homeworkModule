@@ -74,7 +74,7 @@ function doGet(e) {
   
   listBox.addItem('');
   
-  for(var i = 0;i<(size-3);i++){
+  for(var i = 0;i<(size-1);i++){
     
     var classHeader = "class" + (i+1);
     var classCode = classObjectsIndex[loggedInUser][classHeader];
