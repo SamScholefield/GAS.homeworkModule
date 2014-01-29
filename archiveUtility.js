@@ -4,7 +4,7 @@ function onOpen() {
   var entries = [{
     name : "Archive and delete expired rows",
     functionName : "sortByDueDate"
-  },];
+  }];
   sheet.addMenu("Archive", entries);
 };
 
@@ -20,15 +20,16 @@ function sortByDueDate(){
   var dataRange = mainSheet.getRange("A3:M" + lastRow);
   var rowIndex = 0;
   dataRange.sort({column: 4, ascending: false});
+  
   var dateArray = mainSheet.getRange("D3:D" + lastRow).getValues();
-  Logger.log(dateArray.length);
-  Logger.log(dateArray[1]);
+  Logger.log('datearray length is: ' + dateArray.length);
+  Logger.log('datearray position 1 is: ' + dateArray[1]);
   
   var arrayIndex = parseInt(getArrayIndex(dateArray, ss, mainSheet));
   
   Logger.log("arrayIndex: " + arrayIndex);
   
-  rowIndex = arrayIndex + 1  
+  rowIndex = arrayIndex + 3  
   
   if(rowIndex > 1){
       
@@ -76,27 +77,34 @@ function deleteExpired(rowIndex, lastRow, ss, mainSheet){
 
 }
 
-//returns row index of first row where due date < today
+//returns row index of first row where due date has expired ie. less than today
 function getArrayIndex(dateArray, ss, mainSheet){
   
   var today = new Date();
+  today.setHours(0,0,0,0);
   var lastRow = mainSheet.getLastRow();
+  var arrayIndex = 0;
  
   for(var i = 0; i < dateArray.length; i++){
+
     
-    var arrayIndex = 0;
-      Logger.log("short date for array position " + i + " equals: " + shortDate(new Date(dateArray[i])));
-      Logger.log("short date for today equals: " + shortDate(new Date(today)));
-      if(new Date(shortDate(today)) < new Date(shortDate(new Date(dateArray[i])))){
-        arrayIndex = i;
-        return arrayIndex;
-      }
-   }
-
+    var targetDate = new Date(dateArray[i]);
+    
+    Logger.log("today: " + today);
+    Logger.log("targetDate: " + targetDate);
+    
+    if(today > targetDate){
+        
+      arrayIndex = i;
+      return arrayIndex;
+       
+    }
+  }
+  
   return arrayIndex;
-
 }
 
+// dd/mm/yyyy
 function shortDate(d){  
  Logger.log("d equals: " + d);
   var curr_date = d.getDate();

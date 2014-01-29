@@ -447,8 +447,8 @@ function submit(e){
   var callStart = new Date().getTime();
   
 //define calculation formula
-  var form1 = '=IF(NOW()>RC[-3], \"1\", \"0\")';
-  var form2 = '=IF(NOW()<RC[-3], \"1\", \"0\")';
+  var form1 = '=IF(TODAY()>=RC[-3], \"1\", \"0\")';
+  var form2 = '=IF(TODAY()<=RC[-3], \"1\", \"0\")';
   var form3 = '=IF(SUM(RC[-2]:RC[-1])=2, \"1\",\"0\")';
   //var form4 = '=RC[-6]& \" 00:00:01\"';
   //var form5 = '=RC[-6]& \" 23:59:59\"';
