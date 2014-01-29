@@ -90,7 +90,7 @@ function search(e){
    var unknownUserWarning = app.createLabel('The email address you entered is not recognised.')
      .setStyleAttribute('fontSize', '15px').setStyleAttribute('fontWeight','bold').setStyleAttribute('color', 'red');
     
-   var unknownUserLabel = app.createLabel('Please try again below or, alternatively, contact ict@nexus.edu.my') 
+   var unknownUserLabel = app.createLabel('Please try again below or, alternatively, contact ict@nexus.edu.my.') 
      .setStyleAttribute('fontSize', '15px');
     
    var searchPanel = app.createHorizontalPanel();
@@ -128,10 +128,12 @@ function search(e){
    mainPanel.add(unknownUserLabel, 0, 30)
    mainPanel.add(searchPanel, 5, 70);
    mainPanel.add(searchBtnPanel, 1, 115);
-  
+   
+
    workingPanel.setVisible(false);
+
    app.add(mainPanel);
- 
+   
    mainPanel.setVisible(true);    
   
    return app;
@@ -203,14 +205,20 @@ function search(e){
         rowObject.calLink = app.createLabel('No calendar');
       }else{
         rowObject.calLink = app.createAbsolutePanel().add(app.createAnchor('Open calendar',statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].classcalendarlink));
-      }    
+      }      
       
-      if(statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].homeworkstatus == "Homework set for this class"){
+      if(statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].homeworkstatus === "Homework set for this class"){
         rowObject.BGColor = "#f3f3f3";
         rowObject.cellColor   = "#0ba55c";        
       }else{
         rowObject.BGColor = "#f3f3f3";
-        rowObject.cellColor   = "#707070";   
+        rowObject.cellColor   = "#707070"; 
+      }
+
+      if(statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].due === "Not set"){
+        rowObject.dueOn = "-";
+      }else{
+        rowObject.dueOn = shortDate(statusObjectsIndex[classObjectsIndex[loggedInUser][classHeader] + '-2013'].due);
       }
 
       tableArray.push(rowObject);
@@ -226,23 +234,47 @@ function search(e){
     return 0;
   });
 
+//create flextable header row
+  flexTable.setText(0,0, "Class name")
+    .setText(0,1, "Class homework status")
+    .setText(0,2, "Next due on")
+    .setText(0,3, "Calendar link")
+    .setRowStyleAttribute(0, 'color', 'FFFFFF')
+    .setRowStyleAttribute(0, 'backgroundColor', '#3A80F7')
+    .setRowStyleAttribute(0, 'textAlign', 'center');
+
 //populate flextable
   for(var i = 0;i<(size-1);i++){
   
-      flexTable.setText(i,0, tableArray[i].claName)
-        .setText(i,1, tableArray[i].homeworkStatus)
-        .setWidget(i,2, tableArray[i].calLink)
-        .setRowStyleAttribute(i, 'color', tableArray[i].cellColor)
-        .setRowStyleAttribute(i, 'backgroundColor', tableArray[i].BGColor);
-      
+      flexTable.setText(i+1,0, tableArray[i].claName)
+        .setText(i+1,1, tableArray[i].homeworkStatus)
+          .setStyleAttribute(i+1, 1, 'textAlign', 'center')
+        .setText(i+1, 2, tableArray[i].dueOn)
+          .setStyleAttribute(i+1, 2, 'textAlign', 'center')
+        .setWidget(i+1,3, tableArray[i].calLink)
+          .setStyleAttribute(i+1, 3, 'textAlign', 'center')
+        .setRowStyleAttribute(i+1, 'color', tableArray[i].cellColor)
+        .setRowStyleAttribute(i+1, 'backgroundColor', tableArray[i].BGColor);    
     };
-
-  //flexTable.setColumnStyleAttribute(3, "background", "#dddddd");
+    
   workingPanel.setVisible(false);
   app.add(flexTable);
   
   
   return app;
+}
+
+//return date as string in DDD dd-mm-yyyy format
+function shortDate(d){  
+  var dayArray = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  var curr_day = d.getDay() - 1;
+  var curr_date = d.getDate();
+    if(curr_date < 10){curr_date = "0" + curr_date;}
+  var curr_month = d.getMonth() + 1;
+    if(curr_month < 10){curr_month = "0" + curr_month;}
+  var curr_year = d.getFullYear();  
+  var shortDate = dayArray[curr_day] + " " + curr_date + "-" + curr_month + "-" + curr_year;  
+  return (shortDate);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
