@@ -14,33 +14,36 @@ function onOpen() {
 function sortByDueDate(){
 
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var mainSheet = ss.getSheetByName('formData');
-  
+  var mainSheet = ss.getSheetByName('formData');  
   var lastRow = mainSheet.getLastRow();
   var dataRange = mainSheet.getRange("A3:M" + lastRow);
   var rowIndex = 0;
+  
+  //sort data by due date, youngest at top
   dataRange.sort({column: 4, ascending: false});
   
+  //create array of duedates
   var dateArray = mainSheet.getRange("D3:D" + lastRow).getValues();
-  Logger.log('datearray length is: ' + dateArray.length);
-  Logger.log('datearray position 1 is: ' + dateArray[1]);
   
+  //return index where first duedate<today
   var arrayIndex = parseInt(getArrayIndex(dateArray, ss, mainSheet));
   
   Logger.log("arrayIndex: " + arrayIndex);
   
-  rowIndex = arrayIndex + 3  
+  //determine row number of first expired date (2 header rows = +2)
+  rowIndex = arrayIndex + 2;  
   
-  if(rowIndex > 1){
+  //if rowindex is greater than 2 then expired rows have been found
+  if(rowIndex > 2){
       
       var height = (lastRow +1) - rowIndex;
-      
+      Logger.log(rowIndex +","+ height+","+ lastRow);
       archiveExpired(rowIndex, height, lastRow, ss, mainSheet);
 
       return;      
       
     }else{
-
+      Logger.log(rowIndex);
       Logger.log("No expired rows found.")
       return;
   
@@ -64,7 +67,7 @@ function archiveExpired(rowIndex, height, lastRow, ss, mainSheet){
   archiveSheet.getRange("A" + pasteStart + ":M" + pasteEnd).setValues(copyValues);
   archiveSheet.getRange("N" + pasteStart + ":N" + pasteEnd).setValue(timeStamp);
   
-  deleteExpired(rowIndex, lastRow, ss, mainSheet);
+  //deleteExpired(rowIndex, lastRow, ss, mainSheet);
   
   return;
   
@@ -84,18 +87,18 @@ function getArrayIndex(dateArray, ss, mainSheet){
   today.setHours(0,0,0,0);
   var lastRow = mainSheet.getLastRow();
   var arrayIndex = 0;
- 
+  
+  if(dateArray.length == 0){
+    return arrayIndex;
+  }
+  
   for(var i = 0; i < dateArray.length; i++){
-
-    
+  
     var targetDate = new Date(dateArray[i]);
-    
-    Logger.log("today: " + today);
-    Logger.log("targetDate: " + targetDate);
     
     if(today > targetDate){
         
-      arrayIndex = i;
+      arrayIndex = i+1;
       return arrayIndex;
        
     }
